@@ -35,7 +35,7 @@ class ImportPartnerPIPKIP(models.TransientModel):
         for row in range(1, xl_sheet.nrows):
             info, values = self.row_validation(xl_sheet, row)
             if info:
-                self.info = '</br>'.join(info)
+                self.info = '\n'.join(info)
             else:
                 dc_partner_id = self.env['dc.partner'].search([('nik_number', '=', values['nik_number'])])
                 if not dc_partner_id:
