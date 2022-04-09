@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_dc_partner,dc_partner_user_access,model_dc_partner,group_dc_partner_user,1,1,1,1
+access_dc_partner_village,dc_partner_village_user_access,model_dc_partner_village,group_dc_partner_user,1,1,1,1
+access_dc_partner_city,dc_partner_city_user_access,model_dc_partner_city,group_dc_partner_user,1,1,1,1
+access_dc_pip_program,dc_pip_program_user_access,model_dc_pip_program,group_dc_partner_user,1,1,1,1
+access_dc_kip_program,dc_kip_program_user_access,model_dc_kip_program,group_dc_partner_user,1,1,1,1
+access_import_partner_pip_kip,import_partner_pip_kip_user_access,model_import_partner_pip_kip,group_dc_partner_user,1,1,1,1

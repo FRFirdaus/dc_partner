@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="dc_partner_tree_view" model="ir.ui.view">
+        <field name="name">dc_partner_tree_view</field>
+        <field name="model">dc.partner</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="display_name" string="Nama"/>
+                <field name="nik_number" string="Nomor KTP"/>
+                <field name="email" string="Email"/>
+                <field name="mobile" string="Mobile"/>
+                <field name="address" string="Alamat"/>
+                <field name="village_id" string="Desa"/>
+                <field name="city_id" string="Kota"/>
+                <field name="province_id" string="Provinsi"/>
+                <field name="country_id" string="Negara"/>
+                <field name="pip_program_ids" string="PIP Program" widget="many2many_tags"/>
+                <field name="kip_program_ids" string="KIP Program" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="dc_partner_kanban_view" model="ir.ui.view">
+        <field name="name">dc_partner_kanban</field>
+        <field name="model">dc.partner</field>
+        <field name="arch" type="xml">
+            <kanban class="o_res_partner_kanban" quick_create="false">
+                <field name="id"/>
+                <field name="display_name"/>
+                <field name="nik_number"/>
+                <field name="email"/>
+                <field name="mobile"/>
+                <field name="birth_date"/>
+                <field name="birth_place"/>
+                <field name="pip_program" string="Is PIP Program?"/>
+                <field name="kip_program" string="Is KIP Program?"/>
+                <field name="kip_program_ids" string="List KIP Program" widget="many2many_tags"/>
+                <field name="pip_program_ids" string="List PIP Program" widget="many2many_tags"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                            <div class="o_kanban_image_fill_left d-none d-md-block" t-attf-style="background-image: url(#{kanban_image('dc.partner', 'image', record.id.raw_value, placeholder)})" role="img"/>
+                            <!-- <div class="o_kanban_image">
+                                <img alt="Avatar" t-att-src="kanban_image('dc.partner', 'image', record.id.raw_value)"/>
+                            </div> -->
+                            <div class="oe_kanban_details">
+                                <strong>
+                                    <field name="display_name"/>
+                                </strong>
+                                <div t-if="record.nik_number.value">
+                                    <t t-set="nik_number" t-value="'NIK: ' + record.nik_number.value"/>
+                                    <t t-esc="nik_number"/>
+                                </div>
+                                <div t-if="record.birth_date.value and record.birth_place.value">
+                                    <t t-set="ttl" t-value="record.birth_place.value + ', ' + record.birth_date.value"/>
+                                    <t t-esc="ttl"/>
+                                </div>
+                                <div t-if="record.pip_program">
+                                    Program PIP:
+                                    <field name="pip_program_ids" widget="many2many_tags"/>
+                                </div>
+                                <div t-if="record.kip_program">
+                                    Program KIP:
+                                    <field name="kip_program_ids" widget="many2many_tags"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    
+    <record id="dc_partner_form_view" model="ir.ui.view">
+        <field name="name">dc_partner_form_view</field>
+        <field name="model">dc.partner</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <widget name="web_ribbon" text="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+                    <field name="image" widget="image" class="oe_avatar" />
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Name" default_focus="1"/>
+                        </h1>
+                        <div>
+                            <field name="nik_number" placeholder="Nomor KTP.."/>
+                        </div>
+                    </div>
+                    <notebook>
+                        <page string="General Information">
+                            <group>
+                                <group>
+                                    <field name="active" invisible="1"/>
+                                    <field name="religion" string="Agama"/>
+                                    <field name="gender" string="Jenis Kelamin"/>
+                                    <field name="birth_place" string="Tempat Lahir" placeholder="Birth Place (ex: Jakarta)"/>
+                                    <field name="birth_date" string="Tanggal Lahir"/>
+                                    <field name="address" string="Alamat"/>
+                                    <field name="village_id" string="Desa"/>
+                                    <field name="city_id" string="Kota"/>
+                                    <field name="province_id" string="Provinsi"/>
+                                    <field name="country_id" string="Negara"/>
+                                </group>
+                                <group>
+                                    <field name="email" widget="email" placeholder="example@yopmail.com"/>
+                                    <field name="mobile" widget="phone" placeholder="example: +628131122334"/>
+                                    <field name="pip_program" string="Is PIP Program?"/>
+                                    <field name="pip_program_ids" string="List PIP Program" widget="many2many_tags"/>
+                                    <field name="kip_program" string="Is KIP Program?"/>
+                                    <field name="kip_program_ids" string="List KIP Program" widget="many2many_tags"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Pengikut">
+                            <field name="follower_ids">
+                                <tree editable="bottom">
+                                    <field name="name" string="Nama"/>
+                                    <field name="nik_number" string="Nomor KTP"/>
+                                    <field name="email" string="Email"/>
+                                    <field name="mobile" string="Mobile"/>
+                                    <field name="address" string="Alamat"/>
+                                    <field name="village_id" string="Desa"/>
+                                    <field name="city_id" string="Kota"/>
+                                    <field name="province_id" string="Provinsi"/>
+                                    <field name="country_id" string="Negara"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="dc_partner_search_view" model="ir.ui.view">
+        <field name="name">dc_partner_search_view</field>
+        <field name="model">dc.partner</field>
+        <field name="arch" type="xml">
+            <search string="Search DC Partner">
+                <group string="Group By">
+                    <filter name="group_country_id" string="Partner By Negara"
+                            context="{'group_by': 'country_id'}"/>
+                    <filter name="group_province_id" string="Partner By Provinsi"
+                            context="{'group_by': 'province_id'}"/>
+                    <filter name="group_city_id" string="Partner By Kota"
+                            context="{'group_by': 'city_id'}"/>
+                    <filter name="group_village_id" string="Partner By Desa"
+                            context="{'group_by': 'village_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- <record id="dewi_coryati_graph_view" model="ir.ui.view">
+        <field name="name">dewi_coryati_graph_view</field>
+        <field name="model">dc.partner</field>
+        <field name="arch" type="xml">
+            <graph>
+                <field name="city_id" type="col"/>
+            </graph>
+        </field>
+    </record> -->
+
+    <record id="dc_partner_kip_action" model="ir.actions.act_window">
+        <field name="name">DC KIP Partner</field>
+        <field name="res_model">dc.partner</field>
+        <field name="view_mode">kanban,tree,form,graph</field>
+        <field name="domain">[('kip_program','=',True), ('inviter_id', '=', False)]</field>
+        <field name="context">{"default_kip_program":True,"search_default_group_village_id":1,"search_default_group_city_id":1,"search_default_group_province_id":1,"search_default_group_country_id":1}</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Create a partner
+          </p>
+        </field>
+    </record>
+
+    <record id="dc_partner_pip_action" model="ir.actions.act_window">
+        <field name="name">DC PIP Partner</field>
+        <field name="res_model">dc.partner</field>
+        <field name="view_mode">kanban,tree,form,graph</field>
+        <field name="domain">[('pip_program','=',True), ('inviter_id', '=', False)]</field>
+        <field name="context">{"default_pip_program":True,"search_default_group_village_id":1,"search_default_group_city_id":1,"search_default_group_province_id":1,"search_default_group_country_id":1}</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Create a partner
+          </p>
+        </field>
+    </record>
+
+    <record id="dc_partner_village_tree_view" model="ir.ui.view">
+        <field name="name">dc_partner_village_tree_view</field>
+        <field name="model">dc.partner.village</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" string="Nama"/>
+                <field name="city_id" string="Kota"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="dc_partner_city_tree_view" model="ir.ui.view">
+        <field name="name">dc_partner_city_tree_view</field>
+        <field name="model">dc.partner.city</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" string="Nama"/>
+                <field name="state_id" string="Provinsi"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="dc_partner_villge_action" model="ir.actions.act_window">
+        <field name="name">DC Partner Village</field>
+        <field name="res_model">dc.partner.village</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="dc_partner_city_action" model="ir.actions.act_window">
+        <field name="name">DC Partner City</field>
+        <field name="res_model">dc.partner.city</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
