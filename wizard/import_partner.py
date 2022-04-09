@@ -2,7 +2,7 @@
 import base64
 from datetime import datetime
 from odoo import fields, models, _
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 
 try:
     import xlrd
