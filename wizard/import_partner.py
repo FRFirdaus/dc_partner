@@ -43,7 +43,7 @@ class ImportPartnerPIPKIP(models.TransientModel):
                 else:
                     update_dc_partner = dc_partner_id.write(values)
         if self.info:
-            raise ValidationError(_("Error ketika import data"))
+            raise ValidationError(_("Error ketika import data: \n%s" % (self.info)))
 
         domain = [('pip_program','=',True)] if self.partner_program == "PIP" else [('kip_program','=',True)]
         return {
