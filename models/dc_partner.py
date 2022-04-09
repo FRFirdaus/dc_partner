@@ -6,6 +6,9 @@ class DCPartnerClass(models.Model):
     _description = 'Partner of Dewi Coryati PIP and KIP'
     _inherit = ['mail.thread']
     _order = 'name'
+    _sql_constraints = [
+        ('unique_number_nik', 'unique(nik_number)', 'Nomor KTP sudah terdaftar, Partner harus memilik nomor ktp yang unik (tidak boleh duplicate)')
+    ]
     
     image = fields.Binary()
     pip_program = fields.Boolean()
@@ -30,19 +33,19 @@ class DCPartnerClass(models.Model):
     province_id = fields.Many2one('res.country.state', required=True, track_visibility='onchange')
     country_id = fields.Many2one('res.country', required=True, track_visibility='onchange')
     religion = fields.Selection([
-        ('islam', 'Islam'),
-        ('katolik', 'Kristen Katolik'),
-        ('protestan', 'Kristen Protestan'),
-        ('hindu', 'Hindu'),
-        ('buddha', 'Buddha'),
-        ('konghucu', 'Kong Hu Cu')],
+        ('Islam', 'Islam'),
+        ('Kristen Katolik', 'Kristen Katolik'),
+        ('Kristen Protestan', 'Kristen Protestan'),
+        ('Hindu', 'Hindu'),
+        ('Buddha', 'Buddha'),
+        ('Kong Hu Cu', 'Kong Hu Cu')],
         default='islam',
         sting='Agama',
         required=True
     )
     gender = fields.Selection([
-        ('pria', 'Pria'),
-        ('wanita', 'Wanita')],
+        ('Pria', 'Pria'),
+        ('Wanita', 'Wanita')],
         default='pria',
         required=True
     )
@@ -55,7 +58,7 @@ class DCPartnerClass(models.Model):
         track_visibility='onchange'
     )
 
-    inviter_id = fields.Many2one('dc.partner')
+    inviter_id = fields.Many2one('dc.partner', index=True)
 
     kip_program_ids = fields.Many2many('dc.kip.program')
     pip_program_ids = fields.Many2many('dc.pip.program')
@@ -63,11 +66,11 @@ class DCPartnerClass(models.Model):
     @api.constrains('kip_program', 'pip_program', 'kip_program_ids', 'kip_program_ids')
     def _constrains_kip_pip_program(self):
         for rec in self:
-            if not rec.inviter_id and (not rec.kip_program and rec.pip_program):
+            if not rec.inviter_id and (not rec.kip_program and not rec.pip_program):
                 raise ValidationError(_("Partner harus dalam penerima PIP/KIP Program"))
 
-            rec.kip_program = True if rec.kip_program_ids else False
-            rec.pip_program = True if rec.pip_program_ids else False
+            # rec.kip_program = True if rec.kip_program_ids else False
+            # rec.pip_program = True if rec.pip_program_ids else False
 
     def name_get(self):
         result = []
@@ -81,6 +84,9 @@ class DCPartnerClass(models.Model):
 
 class DCPIPProgram(models.Model):
     _name = 'dc.pip.program'
+    _sql_constraints = [
+        ('unique_name_periode', 'unique(name, periode)', 'Nama program PIP dengan periode sudah terdaftar, data PIP program harus memilik nama dan periode unik (tidak boleh duplicate)')
+    ]
 
     name = fields.Char(required=True)
     periode = fields.Char(required=True)
@@ -94,6 +100,9 @@ class DCPIPProgram(models.Model):
 
 class DCKIPProgram(models.Model):
     _name = 'dc.kip.program'
+    _sql_constraints = [
+        ('unique_name_periode', 'unique(name, periode)', 'Nama program KIP dengan periode sudah terdaftar, data KIP program harus memilik nama dan periode unik (tidak boleh duplicate)')
+    ]
 
     name = fields.Char(required=True)
     periode = fields.Char(required=True)
