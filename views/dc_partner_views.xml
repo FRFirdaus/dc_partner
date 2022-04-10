@@ -104,6 +104,7 @@
                                     <field name="country_id" string="Negara"/>
                                 </group>
                                 <group>
+                                    <field name="konstituen_id"/>
                                     <field name="email" widget="email" placeholder="example@yopmail.com"/>
                                     <field name="mobile" widget="phone" placeholder="example: +628131122334"/>
                                     <field name="pip_program" string="Is PIP Program?"/>
