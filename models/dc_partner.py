@@ -91,7 +91,17 @@ class DCPIPProgram(models.Model):
 
     name = fields.Char(required=True)
     periode = fields.Char(required=True)
-    pic = fields.Char()
+    pic = fields.Char(string="PIC")
+    partner_ids = fields.Many2many('dc.partner', compute="_compute_partner")
+
+    def _compute_partner(self):
+        for rec in self:
+            query = "select * from dc_partner_dc_pip_program_rel where dc_pip_program_id IN %s"
+            param = [rec.id]
+            self.env.cr.execute(query, (tuple(param),))
+            response_query = self.env.cr.dictfetchall()
+            partner_list_ids = [x['dc_partner_id'] for x in response_query]
+            rec.partner_ids = partner_list_ids
 
     def name_get(self):
         result = []
@@ -108,7 +118,17 @@ class DCKIPProgram(models.Model):
 
     name = fields.Char(required=True)
     periode = fields.Char(required=True)
-    pic = fields.Char()
+    pic = fields.Char(string="PIC")
+    partner_ids = fields.Many2many('dc.partner', compute="_compute_partner")
+
+    def _compute_partner(self):
+        for rec in self:
+            query = "select * from dc_kip_program_dc_partner_rel where dc_kip_program_id IN %s"
+            param = [rec.id]
+            self.env.cr.execute(query, (tuple(param),))
+            response_query = self.env.cr.dictfetchall()
+            partner_list_ids = [x['dc_partner_id'] for x in response_query]
+            rec.partner_ids = partner_list_ids
 
     def name_get(self):
         result = []
