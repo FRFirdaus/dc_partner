@@ -91,6 +91,7 @@ class DCPIPProgram(models.Model):
 
     name = fields.Char(required=True)
     periode = fields.Char(required=True)
+    pic = fields.Char()
 
     def name_get(self):
         result = []
