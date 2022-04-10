@@ -60,6 +60,7 @@ class ImportPartnerPIPKIP(models.TransientModel):
         city_id = False
         province_id = False
         country_id = False
+        konstituen_id = False
         info = []
         birth_date = self.date_format(xl_sheet.cell(row, 6).value.strip())
         payment_vals = False
@@ -94,6 +95,13 @@ class ImportPartnerPIPKIP(models.TransientModel):
                 country_id = country
             else:
                 info.append("Negara %s tidak ditemukan dalam baris %s" % (xl_sheet.cell(row, 10).value, row+1))
+        
+        if xl_sheet.cell(row, 15).value:
+            konstituen = self._find_konstituen(xl_sheet.cell(row, 15).value, city_id)
+            if konstituen:
+                konstituen_id = konstituen
+            else:
+                info.append("Konstituen %s tidak ditemukan dalam baris %s" % (xl_sheet.cell(row, 15).value, row+1))
 
         values = {
             'name': xl_sheet.cell(row, 0).value,
@@ -107,6 +115,7 @@ class ImportPartnerPIPKIP(models.TransientModel):
             'city_id': city_id,
             'province_id': province_id,
             'country_id': country_id,
+            'konstituen_id': konstituen_id,
             'email': xl_sheet.cell(row,11).value,
             'mobile': xl_sheet.cell(row,12).value
         }
@@ -175,6 +184,18 @@ class ImportPartnerPIPKIP(models.TransientModel):
             })
 
             return create_program_id.id
+
+    def _find_konstituen(self, name, city_id):
+        konstituen_id = self.env['dc.partner.konstituen'].search([('name', '=', name), ('city_id', '=', city_id)], limit=1)
+        if konstituen_id:
+            return konstituen_id.id
+        else:
+            create_konstituen_id = self.env['dc.partner.konstituen'].create({
+                "name": name,
+                "city_id": city_id
+            })
+
+            return create_konstituen_id.id
 
     def action_export_partner(self):
         # Function to generate csv template example..

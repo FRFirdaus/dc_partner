@@ -350,6 +350,30 @@
         </field>
     </record>
 
+    <record id="dc_pip_program_action" model="ir.actions.act_window">
+        <field name="name">DC PIP Program</field>
+        <field name="res_model">dc.pip.program</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="dc_kip_program_action" model="ir.actions.act_window">
+        <field name="name">DC KIP Program</field>
+        <field name="res_model">dc.kip.program</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="dc_partner_konstituen_tree_view" model="ir.ui.view">
+        <field name="name">dc_partner_konstituen_tree_view</field>
+        <field name="model">dc.partner.konstituen</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" string="Nama"/>
+                <field name="city_id" string="Kota"/>
+                <field name="pic" string="PIC"/>
+            </tree>
+        </field>
+    </record>
+
     <record id="dc_partner_konstituen_form_view" model="ir.ui.view">
         <field name="name">dc_partner_konstituen_form_view</field>
         <field name="model">dc.partner.konstituen</field>
@@ -391,15 +415,9 @@
         </field>
     </record>
 
-    <record id="dc_pip_program_action" model="ir.actions.act_window">
-        <field name="name">DC PIP Program</field>
-        <field name="res_model">dc.pip.program</field>
-        <field name="view_mode">tree,form</field>
-    </record>
-
-    <record id="dc_kip_program_action" model="ir.actions.act_window">
-        <field name="name">DC KIP Program</field>
-        <field name="res_model">dc.kip.program</field>
+    <record id="dc_konstituen_action" model="ir.actions.act_window">
+        <field name="name">DC Konstituen</field>
+        <field name="res_model">dc.partner.konstituen</field>
         <field name="view_mode">tree,form</field>
     </record>
 </odoo>
