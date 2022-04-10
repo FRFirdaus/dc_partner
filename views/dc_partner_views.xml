@@ -269,6 +269,47 @@
         </field>
     </record>
 
+    <record id="dc_partner_konstituen_form_view" model="ir.ui.view">
+        <field name="name">dc_partner_konstituen_form_view</field>
+        <field name="model">dc.partner.konstituen</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" string="Nama"/>
+                            <field name="pic" string="Penanggung Jawab"/>
+                        </group>
+                        <group>
+                            <field name="city_id" string="Kota"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Partners">
+                            <field name="partner_ids">
+                                <tree editable="bottom">
+                                    <field name="name" string="Nama"/>
+                                    <field name="nik_number" string="Nomor KTP"/>
+                                    <field name="religion" string="Agama"/>
+                                    <field name="gender" string="Jenis Kelamin"/>
+                                    <field name="birth_place" string="Tempat Lahir" placeholder="Birth Place (ex: Jakarta)"/>
+                                    <field name="birth_date" string="Tanggal Lahir"/>
+                                    <field name="email" placeholder="example@yopmail.com"/>
+                                    <field name="mobile" placeholder="example: +628131122334"/>
+                                    <field name="address" string="Alamat"/>
+                                    <field name="village_id" string="Desa"/>
+                                    <field name="city_id" string="Kota"/>
+                                    <field name="province_id" string="Provinsi"/>
+                                    <field name="country_id" string="Negara"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
     <record id="dc_pip_program_action" model="ir.actions.act_window">
         <field name="name">DC PIP Program</field>
         <field name="res_model">dc.pip.program</field>

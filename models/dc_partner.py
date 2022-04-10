@@ -62,6 +62,7 @@ class DCPartnerClass(models.Model):
 
     kip_program_ids = fields.Many2many('dc.kip.program')
     pip_program_ids = fields.Many2many('dc.pip.program')
+    konstituen_id = fields.Many2one('dc.partner.konstituen')
 
     @api.constrains('kip_program', 'pip_program', 'kip_program_ids', 'kip_program_ids')
     def _constrains_kip_pip_program(self):
@@ -148,3 +149,11 @@ class DCPartnerCity(models.Model):
                 result.append((rec.id, rec.name))
 
         return result
+
+class DCKonstituen(models.Model):
+    _name = 'dc.partner.konstituen'
+
+    name = fields.Char()
+    pic = fields.Char()
+    city_id = fields.Many2one('dc.partner.city')
+    partner_ids = fields.One2many('dc.partner', 'konstituen_id')
