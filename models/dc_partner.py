@@ -107,6 +107,7 @@ class DCKIPProgram(models.Model):
 
     name = fields.Char(required=True)
     periode = fields.Char(required=True)
+    pic = fields.Char()
 
     def name_get(self):
         result = []
@@ -120,6 +121,7 @@ class DCPartnerVillage(models.Model):
 
     name = fields.Char(required=True)
     city_id = fields.Many2one('dc.partner.city')
+    pic = fields.Char()
 
     def name_get(self):
         result = []

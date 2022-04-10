@@ -255,6 +255,7 @@
             <tree>
                 <field name="name" string="Nama"/>
                 <field name="periode" string="Periode"/>
+                <field name="pic" string="PIC"/>
             </tree>
         </field>
     </record>
@@ -266,6 +267,7 @@
             <tree>
                 <field name="name" string="Nama"/>
                 <field name="periode" string="Periode"/>
+                <field name="pic" string="PIC"/>
             </tree>
         </field>
     </record>
