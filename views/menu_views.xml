@@ -2,17 +2,17 @@
 <odoo>
     <menuitem id="dc_pip_menu_parent" name="PIP Program" sequence="1" web_icon="dc_partner,static/src/icon/school.png"/>
     <menuitem id="dc_pip_menu" parent="dc_pip_menu_parent" sequence="10" groups="group_dc_partner_user" action="dc_partner_pip_action" name="PIP Partner Program"/>
-    <menuitem id="dc_pip_location_menu_parent" parent="dc_pip_menu_parent" sequence="20" groups="group_dc_partner_user" name="Konfigurasi Partner Location"/>
+    <menuitem id="dc_pip_location_menu_parent" parent="dc_pip_menu_parent" sequence="20" groups="group_dc_partner_user" name="Daerah"/>
     <menuitem id="dc_pip_location_village_menu_parent" parent="dc_pip_location_menu_parent" sequence="10" action="dc_partner_villge_action" groups="group_dc_partner_user" name="Desa"/>
     <menuitem id="dc_pip_location_city_menu_parent" parent="dc_pip_location_menu_parent" sequence="20" action="dc_partner_city_action" groups="group_dc_partner_user" name="Kota"/>
     <menuitem id="dc_pip_program_menu" parent="dc_pip_menu_parent" sequence="30" groups="group_dc_partner_user" action="dc_pip_program_action" name="Program"/>
-    <menuitem id="dc_pip_import_partner_menu" parent="dc_pip_menu_parent" sequence="40" groups="group_dc_partner_user" action="import_partner_pip_wizard_action" name="Import PIP Partner"/>
+    <menuitem id="dc_pip_import_partner_menu" parent="dc_pip_menu_parent" sequence="40" groups="group_dc_partner_user" action="import_partner_pip_wizard_action" name="Import Partner from Excel"/>
 
     <menuitem id="dc_kip_menu_parent" name="KIP Program" sequence="2" web_icon="dc_partner,static/src/icon/university.PNG"/>
     <menuitem id="dc_kip_menu" parent="dc_kip_menu_parent" sequence="10" groups="group_dc_partner_user" action="dc_partner_kip_action" name="KIP Partner Program"/>
-    <menuitem id="dc_kip_location_menu_parent" parent="dc_kip_menu_parent" sequence="20" groups="group_dc_partner_user" name="Konfigurasi Partner Location"/>
+    <menuitem id="dc_kip_location_menu_parent" parent="dc_kip_menu_parent" sequence="20" groups="group_dc_partner_user" name="Daerah"/>
     <menuitem id="dc_kip_location_village_menu_parent" parent="dc_kip_location_menu_parent" sequence="10" action="dc_partner_villge_action" groups="group_dc_partner_user" name="Desa"/>
     <menuitem id="dc_kip_location_city_menu_parent" parent="dc_kip_location_menu_parent" sequence="20" action="dc_partner_city_action" groups="group_dc_partner_user" name="Kota"/>
     <menuitem id="dc_kip_program_menu" parent="dc_kip_menu_parent" sequence="30" groups="group_dc_partner_user" action="dc_kip_program_action" name="Program"/>
-    <menuitem id="dc_kip_import_partner_menu" parent="dc_kip_menu_parent" sequence="40" groups="group_dc_partner_user" action="import_partner_kip_wizard_action" name="Import KIP Partner"/>
+    <menuitem id="dc_kip_import_partner_menu" parent="dc_kip_menu_parent" sequence="40" groups="group_dc_partner_user" action="import_partner_kip_wizard_action" name="Import Partner from Excel"/>
 </odoo>
