@@ -255,7 +255,7 @@
             <tree>
                 <field name="name" string="Nama"/>
                 <field name="periode" string="Periode"/>
-                <field name="pic" string="PIC"/>
+                <field name="pic" string="Penanggung Jawab"/>
             </tree>
         </field>
     </record>
@@ -271,7 +271,7 @@
                         <field name="periode" string="Periode"/>
                     </group>
                     <group>
-                        <field name="pic" string="PIC"/>
+                        <field name="pic" string="Penanggung Jawab"/>
                     </group>
                     <notebook>
                         <page string="Partners">
@@ -306,7 +306,7 @@
             <tree>
                 <field name="name" string="Nama"/>
                 <field name="periode" string="Periode"/>
-                <field name="pic" string="PIC"/>
+                <field name="pic" string="Penanggung Jawab"/>
             </tree>
         </field>
     </record>
@@ -322,7 +322,7 @@
                         <field name="periode" string="Periode"/>
                     </group>
                     <group>
-                        <field name="pic" string="PIC"/>
+                        <field name="pic" string="Penanggung Jawab"/>
                     </group>
                     <notebook>
                         <page string="Partners">
@@ -369,7 +369,7 @@
             <tree>
                 <field name="name" string="Nama"/>
                 <field name="city_id" string="Kota"/>
-                <field name="pic" string="PIC"/>
+                <field name="pic" string="Penanggung Jawab"/>
             </tree>
         </field>
     </record>
